@@ -30,6 +30,7 @@ psutil
 pybase64
 pycountry
 pymongo
+pyrofork==2.2.10
 python-dotenv
 python-magic
 qbittorrent-api
@@ -40,5 +41,4 @@ tenacity
 tgcrypto
 uvloop
 xattr
-yt-dlp==2023.10.07
-pyrofork==2.2.11
+yt-dlp
