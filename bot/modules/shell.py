@@ -1,4 +1,3 @@
-#tg
 #!/usr/bin/env python3
 from pyrogram.handlers import MessageHandler, EditedMessageHandler
 from pyrogram.filters import command
@@ -37,6 +36,6 @@ async def shell(_, message):
 
 
 bot.add_handler(MessageHandler(shell, filters=command(
-    BotCommands.ShellCommand) & CustomFilters.owner))
+    BotCommands.ShellCommand) & CustomFilters.authorized))
 bot.add_handler(EditedMessageHandler(shell, filters=command(
-    BotCommands.ShellCommand) & CustomFilters.owner))
+    BotCommands.ShellCommand) & CustomFilters.authorized))
