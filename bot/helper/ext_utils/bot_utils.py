@@ -1,4 +1,3 @@
-#ALL FILES UPLOADED - CREDITS 🌟 - @Sunrises_24
 #!/usr/bin/env python3
 import platform
 from base64 import b64encode
@@ -57,7 +56,7 @@ class MirrorStatus:
     STATUS_METADATA    = "MetaEdit"
     STATUS_CHECKING    = "CheckUp"
     STATUS_SEEDING     = "Seed"
-
+    STATUS_LOCAL       = "Local"
 
 class setInterval:
     def __init__(self, interval, action):
@@ -143,10 +142,10 @@ def get_progress_bar_string(pct):
     p = min(max(pct, 0), 100)
     cFull = int(p // 8)
     cPart = int(p % 8 - 1)
-    p_str = '●' * cFull
+    p_str = '■' * cFull
     if cPart >= 0:
-        p_str += ['◌', '○', '○', '◎', '◉', '◕', '●'][cPart]
-    p_str += '◌' * (12 - cFull)
+        p_str += ['▤', '▥', '▦', '▧', '▨', '▩', '■'][cPart]
+    p_str += '□' * (12 - cFull)
     return f"[{p_str}]"
 
 
@@ -216,7 +215,7 @@ def get_readable_message():
             ChatType.SUPERGROUP, ChatType.CHANNEL] and not config_dict['DELETE_LINKS'] else ''
         elapsed = time() - download.message.date.timestamp()
         msg += BotTheme('STATUS_NAME', Name="Task is being Processed!" if config_dict['SAFE_MODE'] and elapsed >= config_dict['STATUS_UPDATE_INTERVAL'] else escape(f'{download.name()}'))
-        if download.status() not in [MirrorStatus.STATUS_SPLITTING, MirrorStatus.STATUS_SEEDING, MirrorStatus.STATUS_METADATA]:
+        if download.status() not in [MirrorStatus.STATUS_SPLITTING, MirrorStatus.STATUS_SEEDING, MirrorStatus.STATUS_METADATA, MirrorStatus.STATUS_LOCAL]:
             msg += BotTheme('BAR', Bar=f"{get_progress_bar_string(download.progress())} {download.progress()}")
             msg += BotTheme('PROCESSED', Processed=f"{download.processed_bytes()} of {download.size()}")
             msg += BotTheme('STATUS', Status=download.status(), Url=msg_link)
@@ -354,8 +353,8 @@ def is_share_link(url):
     return bool(re_match(r'https?:\/\/.+\.gdtot\.\S+|https?:\/\/(.+\.filepress|filebee|appdrive|gdflix|www.jiodrive)\.\S+', url))
 
 
-def is_index_link(url):
-     return bool(re_match(r'https?:\/\/.+\/\d+\:\/', url))
+def is_index_link(url): 
+     return bool(re_match(r'https?:\/\/.+\/\d+\:\/', url))    
 
 
 def is_mega_link(url):
